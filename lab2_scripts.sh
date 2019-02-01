@@ -12,8 +12,9 @@ echo "Enter in a file name: "
 read filename
 
 # 2. Feed the user's regular expression into grep and run into their chosen file
-grep -E $expression $filename
+grep $expression $filename
 
+echo "Step 2 Complete, Initiating Step 3: "
 # 3. Hardcode some grep command calls which will:
 
 # 3.1. Count the number of phone numbers in regex_practice.txt
@@ -39,14 +40,12 @@ grep -E "303-"[0-9]{3}-[0-9]{4} regex_practice.txt > phone_results.txt
 	# Wil search regex_practice.txt for all lines that contain the string
 	# geocities.com since these are the lines containing the email addresses we
 	# care about and outputting them to a new file email_results.txt
-grep -E "geocities.com" regex_practice.txt > email_results.txt
+#grep -E -v "geocities.com" regex_practice.txt > email_results.txt
+grep -E -v "geocities" regex_practice.txt > temp.txt && grep "^.*@.*\.com" temp.txt > email_result.txt && rm -r temp.txt
+
 
 # 3.5. List all of the lines that match a command-line regular expression and stores the result in "command_result.txt"
 	# Finidng all lines in the file that contain exactly two letters regardless
 	# of case followed by exactly 2 numbers and outputting them to a new file
 	# command_results.txt
 grep -E $expression $filename > command_results.txt
-
-
-#git add .
-#git commit -m "uploading phone_results.txt, email_results.txt, and command_results.txt"
